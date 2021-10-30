@@ -1,0 +1,177 @@
+﻿@model Samaneyar.Core.ViewModels.Shop.Product.CreateProductViewModel
+@{
+    Layout = "Shared/_AdminLayout";
+}
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">ایجاد گروه محصول جدید</h4>
+</div>
+<form asp-page="./Index" asp-page-handler="Create"
+      method="post"
+      enctype="multipart/form-data">
+    <div class="modal-body col col-md-8">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">نام</label>
+                    <input type="text" class="form-control" asp-for="Name" onchange="makeSlug('Name', 'Slug')">
+                    <span class="error" asp-validation-for="Name"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="control-label">گروه محصول</label>
+                    <Select asp-for="CategoryId" asp-Items="@(new SelectList(Model.Categories, "Id", "Name"));" type="file" class="form-control">
+                        <option value="0">--انتخاب کنید--</option>
+                    </Select>
+                    <span class="error" asp-validation-for="CategoryId"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="PictureAlt" class="control-label">Alt</label>
+                    <input type="text" class="form-control" asp-for="PictureAlt">
+                    <span class="error" asp-validation-for="PictureAlt" class="error"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="PictureTitle" class="control-label">عنوان</label>
+                    <input type="text" class="form-control" asp-for="PictureTitle">
+                    <span class="error" asp-validation-for="PictureTitle"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group no-margin">
+                    <label asp-for="Description1" class="control-label">2 توضیحات</label>
+                    <textarea class="form-control autogrow" asp-for="Description1"
+                              style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
+                    <span class="error" asp-validation-for="Description1"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Video1" class="control-label">ویدیو 1</label>
+                    <input type="file" asp-for="Video1" class="form-control" accept="image/*">
+                    <span class="error" asp-validation-for="Video1"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Keywords" class="control-label">کلمات کلیدی</label>
+                    <input type="text" class="form-control" asp-for="Keywords">
+                    <span class="error" asp-validation-for="Keywords"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group no-margin">
+                    <label asp-for="Description2" class="control-label">2 توضیحات</label>
+                    <textarea class="form-control autogrow" asp-for="Description2"
+                              style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
+                    <span class="error" asp-validation-for="Description2"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Video2" class="control-label">ویدیو 2</label>
+                    <input type="file" asp-for="Video2" class="form-control" accept="image/*">
+                    <span class="error" asp-validation-for="Video2"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Slug" class="control-label">اسلاگ</label>
+                    <input type="text" class="form-control" asp-for="Slug">
+                    <span class="error" asp-validation-for="Slug"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group no-margin">
+                    <label asp-for="Description3" class="control-label">2 توضیحات</label>
+                    <textarea class="form-control autogrow" asp-for="Description3"
+                              style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
+                    <span class="error" asp-validation-for="Description3"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group no-margin">
+                    <label asp-for="MetaDescription" class="control-label">توضیحات متا</label>
+                    <textarea class="form-control autogrow" asp-for="MetaDescription"
+                              style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
+                    <span class="error" asp-validation-for="MetaDescription"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="col-md-4">
+        <p></p>
+        <img id="imgCourse" class="thumbnail" src="/FileUploader/asp-net/2021-09-15-23-49-49-img-2.jpg" />
+        <div class="form-group">
+            <label asp-for="Picture" class="control-label">عکس<span class="text-danger">*</span></label>
+            <input id="imgCourseUp" type="file" asp-for="Picture" class="form-control" accept="image/*" required>
+            <span class="text-danger" asp-validation-for="Picture"></span>
+            <p class="help-block"> width:600px; height:400px</p>
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
+        <button type="submit" class="btn btn-info waves-effect waves-light">ایجاد</button>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+
+        CKEDITOR.replace('Description', {
+            customConfig: '~/js/Config.js'
+        });
+
+
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgCourse').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgCourseUp").change(function () {
+            readURL(this);
+        });
+
+    </script>
+}
